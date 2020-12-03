@@ -1,31 +1,92 @@
-* merge sort
-  - c++ stable sort
-  - in place sort
-** overview
-   - divide array into two halves
-   - recursively sort each half
-   - merge two halves
-** merge two sorted array     
-  #+begin_src python :results output
+#+STARTUP: overview
+* Merge sort
+  - In C++ STL use stable_sort() for merge sort
+  - Merge sort is in place sorting algorithm
+** Overview
+   - Divide array into two halves
+   - Recursively sort each half
+   - Merge two halves
+** Merge two sorted arrays     
+  #+begin_src ipython :session :exports both :results output drawer async t
+# Precondition: left and right half of array is sorted
 import copy
-arr = [2, 5, 7, 9, 0, 1, 3, 4, 6, 8]
-
-def merge(arr, lo, mid, hi):
+def merge(arr, lo, hi, mid):
+    # Merge sort uses extra space proportional to N
     aux = copy.copy(arr);
-
+    
     i, j = lo, mid + 1
-    k = 0
+    k = lo
     while k <= hi:
-        if i > mid:           arr[k] = aux[j]; j = j + 1
-        elif j > hi:          arr[k] = aux[i]; i = i + 1
-        elif aux[j] < aux[i]: arr[k] = aux[j]; j = j + 1
-        else:                 arr[k] = aux[i]; i = i + 1
+        if i > mid:           arr[k] = aux[j]; j = j + 1 # left half of array exhousted
+        elif j > hi:          arr[k] = aux[i]; i = i + 1 # right half of array exhousted
+        elif aux[j] < aux[i]: arr[k] = aux[j]; j = j + 1 # take element from the right half 
+        else:                 arr[k] = aux[i]; i = i + 1 # take element from the left half
         k += 1        
             
-        
-merge(arr, 0, 3, 9)
+
+arr = [2, 5, 7, 9, 0, 1, 3, 4, 6, 8]
+
+merge(arr, 0, 9, 3)
 print(arr)
   #+end_src
 
   #+RESULTS:
-  : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  :results:
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  :end:
+
+
+** Merge
+   #+begin_src ipython :session :exports both :results output drawer async t
+def merge_sort(arr, lo, hi):
+    if lo < hi:
+        mid = lo + (hi - lo) // 2
+        merge_sort(arr, lo, mid)
+        merge_sort(arr, mid+1, hi)
+        merge(arr, lo, hi, mid)
+
+arr1 = [6, 9, 0, 2, 3, 7, 8, 1]
+
+merge_sort(arr1, 0, len(arr1) - 1)
+print(arr1)
+   #+end_src
+
+   #+RESULTS:
+   :results:
+   [0, 1, 2, 3, 6, 7, 8, 9]
+   :end:
+
+** TODO Performance improvements
+** Buttom-up merge sort
+   #+begin_src ipython :session :exports both :results output drawer async t
+def sort(arr):
+    N = len(arr)
+    aux = [N]
+    sz = 1
+    while sz < N:
+        lo = 0
+        while lo < N - sz:
+            merge(arr, lo, min(lo+sz+sz-1, N-1), lo+sz-1)
+            lo += sz+sz
+        sz = sz+sz
+
+arr2 = [6, 9, 0, 2, 3, 7, 8, 1]
+sort(arr2)
+print(arr2)
+   #+end_src
+
+   #+RESULTS:
+   :results:
+   [0, 1, 2, 3, 6, 7, 8, 9]
+   :end:
+** TODO Application
+*** Polar order
+    - Given a point p, order points by polar angle they make with p.
+    - Graham scan algorithm for convex hull
+    - Compute polar angle _theta_ w.r.t p using atan2().
+    - drawback :: evaluation a trigonometric function is expensive
+    - ccw-based solution :: code comments 
+      - if p1 is above p and p2 is belov p, then p1 makes smaller polar angle
+      - if p1 is belov p and p2 is above p, then p1 make larger polar angle
+      - otherwise, ccw(p, p1, p2) identifies wich of p1 or p2 maker larger angle
+** TODO Interview Questions
