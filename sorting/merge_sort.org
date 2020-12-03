@@ -7,7 +7,7 @@
    - Recursively sort each half
    - Merge two halves
 ** Merge two sorted arrays
-   #+begin_src ipython :session :results output drawer async t
+   #+begin_src python :session :results both output drawer async t
 # Precondition: left and right half of array is sorted
 import copy
 def merge(arr, lo, hi, mid):
@@ -35,9 +35,8 @@ print(arr)
   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   :end:
 
-
 ** Merge
-   #+begin_src ipython :session :exports both :results output drawer async t
+   #+begin_src python :session :exports both :results output drawer async t
 def merge_sort(arr, lo, hi):
     if lo < hi:
         mid = lo + (hi - lo) // 2
@@ -58,7 +57,7 @@ print(arr1)
 
 ** TODO Performance improvements
 ** Buttom-up merge sort
-   #+begin_src ipython :session :exports both :results output drawer async t
+   #+begin_src python :session :exports both :results output drawer async t
 def sort(arr):
     N = len(arr)
     aux = [N]
