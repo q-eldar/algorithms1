@@ -6,8 +6,8 @@
    - Divide array into two halves
    - Recursively sort each half
    - Merge two halves
-** Merge two sorted arrays     
-  #+begin_src ipython :session :exports both :results output drawer async t
+** Merge two sorted arrays
+   #+begin_src ipython :session :results output drawer async t
 # Precondition: left and right half of array is sorted
 import copy
 def merge(arr, lo, hi, mid):
