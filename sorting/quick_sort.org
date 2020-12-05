@@ -1,5 +1,5 @@
 #+STARTUP: overview
-* Qucik Sorting
+* Quick Sorting
   - In-place
   - Complexity N log n
   - Not stable
@@ -40,6 +40,7 @@ print(arr)
    #+RESULTS:
    : 3
    : [2, 2, 3, 4, 7, 5, 5]
+   
 ** Quick sort
    Now as we done with partitioning the rest is four line of code.
    #+begin_src python :session :results output
