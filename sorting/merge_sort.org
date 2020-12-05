@@ -88,4 +88,6 @@ print(arr2)
       - if p1 is above p and p2 is belov p, then p1 makes smaller polar angle
       - if p1 is belov p and p2 is above p, then p1 make larger polar angle
       - otherwise, ccw(p, p1, p2) identifies wich of p1 or p2 maker larger angle
+    - hackerrank :: https://www.hackerrank.com/challenges/polar-angles/problem
+    - codeforce :: https://codeforces.com/blog/entry/72815
 ** TODO Interview Questions
